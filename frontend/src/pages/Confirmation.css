@@ -1,0 +1,61 @@
+.cf-root { min-height: 100vh; background: var(--gray-50); }
+
+.cf-success-banner { background: linear-gradient(135deg, var(--accent) 0%, #ff7043 100%); color: #fff; text-align: center; padding: 48px 24px 40px; }
+.cf-checkmark { width: 64px; height: 64px; background: rgba(255,255,255,0.2); border: 3px solid rgba(255,255,255,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 0 auto 16px; }
+.cf-success-banner h2 { font-family: var(--font-display); font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+.cf-success-banner p { font-size: 15px; color: rgba(255,255,255,0.8); }
+
+.cf-container { max-width: 1000px; margin: 0 auto; padding: 32px 24px 60px; }
+.cf-layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+.cf-left { display: flex; flex-direction: column; gap: 20px; }
+.cf-right { display: flex; flex-direction: column; gap: 20px; }
+
+.cf-section { background: #fff; border-radius: var(--radius-md); padding: 20px 22px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); }
+.cf-section-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+
+.booking-id-row { display: flex; align-items: center; justify-content: space-between; }
+.booking-id-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray-400); font-weight: 600; margin-bottom: 4px; }
+.booking-id { font-family: var(--font-display); font-size: 22px; font-weight: 800; }
+.btn-share { padding: 8px 16px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; color: var(--gray-600); }
+
+.cf-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 14px; }
+.cf-row-label { color: var(--gray-500); }
+.cf-row-val { font-weight: 600; }
+.cf-row-val.accent { color: var(--accent); }
+.cf-divider { height: 1px; background: var(--gray-100); margin: 6px 0; }
+.cf-row.total { font-family: var(--font-display); font-weight: 800; font-size: 16px; }
+
+.cf-map { background: var(--gray-50); border: 1px dashed var(--gray-300); border-radius: var(--radius-sm); padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.route-line { display: flex; align-items: center; }
+.route-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.route-dot.start { background: var(--success); }
+.route-dot.end { background: var(--accent); }
+.route-path { flex: 1; height: 3px; background: linear-gradient(90deg, var(--success), var(--accent)); margin: 0 8px; border-radius: 2px; }
+.route-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-500); font-weight: 600; }
+.btn-navigate { padding: 10px; background: var(--black); color: #fff; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; }
+
+.checklist { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.check-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--gray-700); }
+.check-item.done { color: var(--gray-400); text-decoration: line-through; }
+.check-box { width: 20px; height: 20px; border: 2px solid var(--gray-300); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.check-box.checked { background: var(--success); border-color: var(--success); color: #fff; }
+.btn-done { width: 100%; padding: 13px; background: var(--success); color: #fff; font-size: 15px; font-weight: 700; font-family: var(--font-display); border-radius: var(--radius-sm); }
+
+.cf-car-img { width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 14px; }
+.cf-car-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.cf-car-tags { display: flex; gap: 6px; }
+.tag { padding: 3px 10px; background: var(--gray-100); border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--gray-600); }
+
+.pickup-detail-row { display: flex; align-items: flex-start; gap: 12px; padding: 7px 0; font-size: 13px; border-bottom: 1px solid var(--gray-50); }
+.pdl { color: var(--gray-400); font-weight: 600; min-width: 90px; }
+
+.cf-social-proof { background: linear-gradient(135deg, #fff7f0 0%, #fff 100%); border-color: rgba(232,57,14,0.15); }
+.sp-header { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.cf-social-proof p { font-size: 13px; color: var(--gray-600); margin-bottom: 14px; }
+.sp-avatars { display: flex; align-items: center; position: relative; height: 30px; }
+.sp-avatar { width: 28px; height: 28px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; border: 2px solid #fff; position: absolute; }
+.sp-text { font-size: 12px; color: var(--gray-500); margin-left: 120px; }
+
+.btn-home { width: 100%; padding: 12px 20px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; color: var(--gray-600); }
+
+@media (max-width: 768px) { .cf-layout { grid-template-columns: 1fr; } }

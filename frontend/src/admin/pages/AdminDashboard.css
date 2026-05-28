@@ -1,0 +1,62 @@
+.adash-root { display: flex; flex-direction: column; gap: 28px; }
+
+.adash-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.adash-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+.adash-sub { font-size: 13px; color: var(--gray-400); }
+.adash-export-btn { padding: 10px 20px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; color: var(--gray-600); background: #fff; }
+
+.adash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.stat-card { background: #fff; border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); }
+.stat-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.stat-icon { font-size: 22px; }
+.stat-change { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+.stat-change.up { background: rgba(22,163,74,0.1); color: var(--success); }
+.stat-change.down { background: rgba(232,57,14,0.1); color: var(--accent); }
+.stat-val { font-family: var(--font-display); font-size: 30px; font-weight: 800; margin-bottom: 4px; }
+.stat-label { font-size: 13px; color: var(--gray-400); font-weight: 500; }
+
+.adash-mid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+
+.adash-card { background: #fff; border-radius: var(--radius-md); padding: 24px 26px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); }
+.adash-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.adash-card-header h3 { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+.adash-view-all { font-size: 13px; font-weight: 600; color: var(--accent); }
+
+.chart-period-tabs { display: flex; gap: 6px; }
+.chart-period-tabs button { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--gray-500); border: 1.5px solid var(--gray-200); background: #fff; }
+.chart-period-tabs button.active { background: var(--black); color: #fff; border-color: var(--black); }
+
+.bar-chart { display: flex; align-items: flex-end; gap: 16px; height: 180px; padding-top: 20px; }
+.bar-group { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; height: 100%; }
+.bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+.bar-fill {
+  width: 100%; background: linear-gradient(180deg, var(--accent) 0%, #ff7043 100%);
+  border-radius: 6px 6px 0 0; position: relative; min-height: 8px;
+}
+.bar-tip { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: var(--gray-600); white-space: nowrap; }
+.bar-label { font-size: 12px; color: var(--gray-400); font-weight: 600; }
+
+.top-cars-list { display: flex; flex-direction: column; gap: 14px; }
+.top-car-row { display: flex; align-items: center; gap: 14px; padding: 12px; background: var(--gray-50); border-radius: var(--radius-sm); }
+.top-car-rank { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--accent); width: 28px; text-align: center; }
+.top-car-info { flex: 1; }
+.top-car-name { font-size: 14px; font-weight: 700; }
+.top-car-meta { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+.top-car-revenue { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--success); }
+
+.adash-table-wrap { overflow-x: auto; }
+.adash-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.adash-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--gray-400); border-bottom: 1.5px solid var(--gray-100); }
+.adash-table td { padding: 14px 14px; border-bottom: 1px solid var(--gray-50); color: var(--gray-700); }
+.adash-table tr:last-child td { border-bottom: none; }
+.booking-id-cell { font-family: monospace; font-size: 12px; color: var(--gray-500); }
+
+.status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.status-active { background: rgba(22,163,74,0.1); color: var(--success); }
+.status-completed { background: rgba(59,130,246,0.1); color: #2563eb; }
+.status-cancelled { background: rgba(232,57,14,0.1); color: var(--accent); }
+
+@media (max-width: 1100px) {
+  .adash-stats { grid-template-columns: repeat(2, 1fr); }
+  .adash-mid { grid-template-columns: 1fr; }
+}

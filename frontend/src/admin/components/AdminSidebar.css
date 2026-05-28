@@ -1,0 +1,142 @@
+.admin-sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: var(--black);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* 🔹 Logo */
+.asb-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.asb-logo-mark {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.asb-logo-text {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.asb-logo-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* 🔹 Nav */
+.asb-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 12px;
+}
+
+.asb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+
+  color: black;  /* ✔️ visible text */
+  cursor: pointer;              /* 🔥 clickable feel */
+  transition: all 0.2s ease;    /* smooth animation */
+  text-decoration-line: none;
+  background-color: white;
+}
+
+/* 🔥 Hover effect */
+.asb-nav-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+/* 🔥 Active (selected page) */
+.asb-nav-item.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.asb-nav-icon {
+  font-size: 17px;
+  width: 20px;
+  text-align: center;
+}
+
+/* 🔹 Footer */
+.asb-footer {
+  padding: 16px 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.asb-admin-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.asb-avatar {
+  width: 34px;
+  height: 34px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.asb-admin-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.asb-admin-role {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+.asb-logout {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-align: left;
+  padding: 6px 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.asb-logout:hover {
+  color: #fff;
+}

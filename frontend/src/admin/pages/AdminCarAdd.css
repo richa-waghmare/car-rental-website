@@ -1,0 +1,139 @@
+.addcar-container {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.addcar-card {
+  width: 100%;
+  max-width: 900px;
+
+  background: #fff;
+  border-radius: 16px;
+
+  padding: 30px;
+
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.addcar-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+
+  margin-bottom: 8px;
+}
+
+.addcar-subtitle {
+  color: #666;
+  font-size: 14px;
+
+  margin-bottom: 30px;
+}
+
+/* 🔥 Form Grid */
+.addcar-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* 🔹 Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+
+  color: #222;
+}
+
+/* 🔹 Inputs */
+.form-group input,
+.form-group select {
+  padding: 12px 14px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  outline: none;
+  transition: 0.2s ease;
+}
+
+/* 🔥 Focus */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #ff6b00;
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+}
+
+/* 🔥 File Input */
+.form-group input[type="file"] {
+  padding: 10px;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+/* 🔥 Button */
+.btn-addcar {
+  grid-column: 1 / -1;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #ff6b00, #ff8c42);
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-addcar:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* 🔥 Image Preview */
+.image-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 14px;
+}
+
+.preview-image {
+  width: 100px;
+  height: 80px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+  border: 2px solid #eee;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* 🔥 Mobile Responsive */
+@media (max-width: 768px) {
+
+  .addcar-form {
+    grid-template-columns: 1fr;
+  }
+
+  .addcar-card {
+    padding: 22px;
+  }
+
+}

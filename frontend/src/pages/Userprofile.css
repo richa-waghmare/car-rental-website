@@ -1,0 +1,91 @@
+.profile-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-card {
+  width: 380px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  background: orange;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+/* Editable Inputs */
+.editable-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  padding: 5px 0;
+  text-align: right;
+}
+
+/* Name styling */
+.name {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Email styling */
+.email {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+
+/* Info */
+.profile-info {
+  margin: 20px 0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hover = editable feel */
+.editable-input:hover {
+  border-bottom: 1px solid orange;
+}
+
+/* Save Button */
+.btn.save {
+  width: 100%;
+  padding: 12px;
+  background: orange;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 15px;
+}

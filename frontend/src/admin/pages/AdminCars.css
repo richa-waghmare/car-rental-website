@@ -1,0 +1,51 @@
+.acars-root { display: flex; flex-direction: column; gap: 24px; }
+
+.acars-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.acars-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+.acars-sub { font-size: 13px; color: var(--gray-400); }
+.btn-add-car { padding: 12px 22px; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; font-family: var(--font-display); border-radius: var(--radius-sm); }
+
+.acars-toolbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.acars-search-wrap { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); padding: 4px 14px; flex: 1; max-width: 320px; }
+.acars-search { border: none; background: transparent; padding: 8px 0; font-size: 14px; outline: none; font-family: var(--font-body); flex: 1; }
+.acars-filter-tabs { display: flex; gap: 6px; }
+.filter-tab { padding: 8px 16px; border: 1.5px solid var(--gray-200); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--gray-500); background: #fff; }
+.filter-tab.active { background: var(--black); border-color: var(--black); color: #fff; }
+
+.acars-card { background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); overflow: hidden; }
+.acars-table-wrap { overflow-x: auto; }
+.acars-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.acars-table th { text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--gray-400); border-bottom: 1.5px solid var(--gray-100); background: var(--gray-50); }
+.acars-table td { padding: 14px 16px; border-bottom: 1px solid var(--gray-50); color: var(--gray-700); vertical-align: middle; }
+.acars-table tr:last-child td { border-bottom: none; }
+
+.car-cell { display: flex; align-items: center; gap: 12px; }
+.car-thumb { width: 56px; height: 40px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.car-cell-name { font-weight: 700; font-size: 14px; }
+.type-badge { padding: 3px 10px; background: var(--gray-100); border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--gray-600); }
+.fuel-cell { font-size: 13px; color: var(--gray-500); }
+
+.status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.status-available { background: rgba(22,163,74,0.1); color: var(--success); }
+.status-booked { background: rgba(59,130,246,0.1); color: #2563eb; }
+.status-maintenance { background: rgba(234,179,8,0.12); color: #b45309; }
+
+.action-btns { display: flex; gap: 6px; }
+.action-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+.action-btn.edit { background: var(--gray-100); color: var(--gray-600); }
+.action-btn.delete { background: rgba(232,57,14,0.08); color: var(--accent); }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(3px); }
+.modal-box { background: #fff; border-radius: var(--radius-lg); width: 540px; max-width: 95vw; box-shadow: var(--shadow-lg); overflow: hidden; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; border-bottom: 1px solid var(--gray-100); }
+.modal-header h3 { font-family: var(--font-display); font-size: 18px; font-weight: 800; }
+.modal-close { font-size: 16px; color: var(--gray-400); }
+.modal-form { padding: 24px 28px; display: flex; flex-direction: column; gap: 16px; }
+.mf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mf-group { display: flex; flex-direction: column; gap: 6px; }
+.mf-group label { font-size: 12px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.6px; }
+.mf-group input, .mf-group select { padding: 10px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 14px; font-family: var(--font-body); color: var(--black); outline: none; }
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; padding-top: 8px; }
+.btn-modal-cancel { padding: 11px 22px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; color: var(--gray-500); }
+.btn-modal-save { padding: 11px 24px; background: var(--accent); color: #fff; border-radius: var(--radius-sm); font-size: 14px; font-weight: 700; font-family: var(--font-display); }

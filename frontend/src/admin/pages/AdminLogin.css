@@ -1,0 +1,82 @@
+.al-root { display: flex; min-height: 100vh; }
+
+.al-left {
+  flex: 1;
+  background: var(--black);
+  background-image: url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=80');
+  background-size: cover; background-position: center;
+  position: relative;
+  display: flex; align-items: center; padding: 60px;
+}
+.al-left::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 100%);
+}
+.al-left-content { position: relative; z-index: 1; color: #fff; max-width: 480px; }
+
+.al-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; }
+.al-logo-mark {
+  width: 48px; height: 48px; background: var(--accent); color: #fff;
+  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  display: flex; align-items: center; justify-content: center; border-radius: 12px;
+}
+.al-brand-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; }
+.al-brand-sub { font-size: 12px; color: var(--accent-light); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+.al-headline { font-family: var(--font-display); font-size: 46px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+.al-headline span { color: var(--accent-light); }
+.al-desc { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 48px; }
+
+.al-stats { display: flex; gap: 32px; }
+.al-stat-val { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: #fff; }
+.al-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 500; margin-top: 2px; }
+
+.al-right {
+  width: 480px;
+  display: flex; align-items: center; justify-content: center;
+  background: #f4f5f7; padding: 40px;
+}
+.al-card {
+  width: 100%; max-width: 380px;
+  background: #fff; border-radius: var(--radius-lg);
+  padding: 36px; box-shadow: var(--shadow-lg);
+}
+
+.al-card-header { text-align: center; margin-bottom: 32px; }
+.al-shield { font-size: 36px; margin-bottom: 12px; }
+.al-card-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+.al-card-header p { font-size: 13px; color: var(--gray-400); }
+
+.al-form { display: flex; flex-direction: column; gap: 18px; }
+.al-form-group { display: flex; flex-direction: column; gap: 7px; }
+.al-form-group label { font-size: 13px; font-weight: 700; color: var(--gray-600); }
+.al-form-group input {
+  padding: 12px 14px; border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm); font-size: 14px; color: var(--black);
+  outline: none; font-family: var(--font-body); width: 100%;
+}
+
+.al-pass-wrap { position: relative; }
+.al-pass-wrap input { padding-right: 44px; }
+.al-eye { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+
+.al-form-row { display: flex; justify-content: space-between; align-items: center; }
+.al-remember { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-600); }
+.al-remember input { accent-color: var(--accent); width: 15px; height: 15px; }
+.al-forgot { font-size: 13px; color: var(--accent); font-weight: 500; }
+
+.al-btn-login {
+  width: 100%; padding: 15px; background: var(--accent); color: #fff;
+  font-size: 15px; font-weight: 700; font-family: var(--font-display);
+  border-radius: var(--radius-sm);
+}
+
+.al-back { margin-top: 24px; text-align: center; padding-top: 20px; border-top: 1px solid var(--gray-100); }
+.al-back button { font-size: 13px; font-weight: 600; color: var(--gray-400); }
+
+@media (max-width: 900px) {
+  .al-root { flex-direction: column; }
+  .al-left { min-height: 260px; padding: 36px 24px; }
+  .al-headline { font-size: 32px; }
+  .al-right { width: 100%; padding: 30px 24px; }
+}
