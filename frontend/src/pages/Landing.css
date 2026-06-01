@@ -75,6 +75,7 @@
 .chip-row {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .chip {
@@ -83,25 +84,35 @@
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .chip.active {
-  background: orange;
+  background: var(--accent);
   color: #fff;
+  border-color: var(--accent);
 }
 
 .price-slider {
   width: 100%;
+  accent-color: var(--accent);
 }
 
 .btn-search {
   grid-column: 1 / -1;
   padding: 12px;
-  background: orange;
+  background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
 }
 
 /* CAR LIST */
@@ -161,6 +172,7 @@
 .car-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-top: 4px solid var(--accent);
 }
 
 /* IMAGE */
@@ -191,7 +203,7 @@
 .car-card p:last-child {
   font-size: 22px;
   font-weight: 700;
-  color: #0f9d58;
+  color: var(--accent);
   margin-bottom: 20px;
 }
 
@@ -204,9 +216,25 @@
   margin: 10px 18px;
   font-size: 15px;
   color: #666;
+  gap: 8px;
 }
 
 /* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .search-panel-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-hero {
+    padding: 0 40px;
+    height: 280px;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+}
 
 @media (max-width: 768px) {
 
@@ -222,6 +250,95 @@
     font-size: 20px;
   }
 
+  .landing-hero {
+    padding: 0 30px;
+    height: 240px;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-text p {
+    font-size: 14px;
+  }
+
+  .chip-row {
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .cars-container h2 {
+    font-size: 24px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-hero {
+    padding: 0 20px;
+    height: 200px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .hero-tag {
+    font-size: 12px;
+  }
+
+  .search-panel-inner {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .filter-section label {
+    font-size: 14px;
+  }
+
+  .chip {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .cars-container {
+    width: 100%;
+    margin: 30px auto;
+    padding: 16px;
+  }
+
+  .cars-container h2 {
+    font-size: 20px;
+  }
+
+  .car-card h3 {
+    font-size: 18px;
+    margin: 14px 12px 8px;
+  }
+
+  .car-card p {
+    margin: 6px 12px;
+    font-size: 14px;
+  }
+
+  .car-details {
+    margin: 8px 12px;
+    font-size: 13px;
+  }
 }
 
 .car-content {
@@ -238,6 +355,6 @@
 .car-price {
   font-size: 24px;
   font-weight: bold;
-  color: #0f9d58;
+  color: var(--accent);
   margin-top: 15px;
 }

@@ -28,6 +28,9 @@ import AdminCarEdit from './admin/pages/AdminCarEdit';
       <Route path="/register" element={<Register />} />
       <Route path="/landing" element={<Landing />} />
       <Route path="/search" element={<SearchResults />} />
+      <Route path="/CarDetail/:id" element={<CarDetail/>} />
+      <Route path="/Booking" element={<Booking/>} />
+      <Route path="/Confirmation" element={<Confirmation/>} />
       <Route path="/Userprofile" element={<Userprofile/>} />
       <Route path="/ForgotPassword" element={<ForgotPassword/>} />
       <Route path="/reset-password/:token" element={<ResetPassword/>} />

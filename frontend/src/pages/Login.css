@@ -15,13 +15,13 @@
 }
 .login-left::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(232,57,14,0.3) 100%);
+  background: linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(22,163,74,0.3) 100%);
 }
 .login-left-inner { position: relative; z-index: 1; color: #fff; }
 
 .login-hero-tag {
   display: inline-block;
-  background: rgba(232,57,14,0.2); border: 1px solid var(--accent);
+  background: rgba(22,163,74,0.2); border: 1px solid var(--accent);
   color: var(--accent-light); font-size: 12px; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
   padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
@@ -35,7 +35,7 @@
   font-size: 16px; color: rgba(255,255,255,0.7);
   max-width: 380px; line-height: 1.7; margin-bottom: 36px;
 }
-.login-features { display: flex; gap: 24px; }
+.login-features { display: flex; gap: 24px; flex-wrap: wrap; }
 .lf-item { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); }
 .lf-icon { font-size: 18px; }
 
@@ -60,7 +60,7 @@
 }
 .login-tabs .tab {
   flex: 1; padding: 10px; font-size: 14px; font-weight: 600;
-  border-radius: 6px; color: var(--gray-500);
+  border-radius: 6px; color: var(--gray-500); cursor: pointer; border: none; background: transparent; transition: all 0.2s ease;
 }
 .login-tabs .tab.active { background: #fff; color: var(--black); box-shadow: var(--shadow-sm); }
 
@@ -69,14 +69,22 @@
 .form-group label { font-size: 13px; font-weight: 600; color: var(--gray-600); }
 .form-group input {
   padding: 12px 14px; border: 1.5px solid var(--gray-200);
-  border-radius: var(--radius-sm); font-size: 14px; color: var(--black); outline: none;
+  border-radius: var(--radius-sm); font-size: 14px; color: var(--black); outline: none; transition: all 0.2s ease;
 }
-.forgot { position: absolute; right: 0; top: 0; font-size: 12px; color: var(--accent); font-weight: 500; }
+.form-group input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.1);
+}
+.forgot { position: absolute; right: 0; top: 0; font-size: 12px; color: var(--accent); font-weight: 500; cursor: pointer; }
 
 .btn-primary {
   width: 100%; padding: 14px; background: var(--accent); color: #fff;
   font-size: 15px; font-weight: 700; border-radius: var(--radius-sm);
-  font-family: var(--font-display);
+  font-family: var(--font-display); border: none; cursor: pointer; transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
 }
 
 .divider { text-align: center; position: relative; color: var(--gray-400); font-size: 13px; }
@@ -88,16 +96,74 @@
 .btn-social {
   width: 100%; padding: 12px 14px; border: 1.5px solid var(--gray-200);
   border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--black);
-  display: flex; align-items: center; justify-content: center; gap: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.2s ease; background: #fff;
+}
+.btn-social:hover {
+  border-color: var(--accent);
+  background: rgba(22,163,74,0.05);
 }
 .btn-guest {
   width: 100%; margin-top: 20px; padding: 12px; font-size: 13px;
-  font-weight: 600; color: var(--gray-500); border-top: 1px solid var(--gray-100);
+  font-weight: 600; color: var(--gray-500); border-top: 1px solid var(--gray-100); background: none; border: none; cursor: pointer; transition: all 0.2s ease;
+}
+.btn-guest:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .login-left {
+    padding: 40px;
+  }
+  .login-hero-title {
+    font-size: 42px;
+  }
 }
 
 @media (max-width: 768px) {
   .login-root { flex-direction: column; }
   .login-left { min-height: 240px; padding: 30px 24px; }
   .login-hero-title { font-size: 36px; }
+  .login-hero-sub { font-size: 14px; }
+  .login-features { gap: 12px; }
   .login-right { width: 100%; padding: 30px 24px; }
+  .login-card { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .login-left {
+    padding: 24px 16px;
+    min-height: 200px;
+  }
+  .login-hero-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .login-hero-sub {
+    font-size: 13px;
+    max-width: 100%;
+  }
+  .login-features {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lf-item {
+    font-size: 12px;
+  }
+  .login-right {
+    padding: 20px 16px;
+  }
+  .login-logo {
+    margin-bottom: 24px;
+  }
+  .login-form {
+    gap: 12px;
+  }
+  .form-group input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .btn-primary {
+    padding: 12px;
+    font-size: 14px;
+  }
 }

@@ -1,59 +1,88 @@
 .bk-root { min-height: 100vh; background: var(--gray-50); }
 .bk-container { max-width: 1000px; margin: 0 auto; padding: 28px 24px 60px; }
-.bk-back { font-size: 14px; font-weight: 600; color: var(--gray-500); margin-bottom: 12px; display: inline-block; }
+.bk-back { font-size: 14px; font-weight: 600; color: var(--gray-500); margin-bottom: 12px; display: inline-block; cursor: pointer; transition: all 0.2s ease; }
+.bk-back:hover { color: var(--accent); }
 .bk-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 28px; }
 
 .bk-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start; }
 .bk-left { display: flex; flex-direction: column; gap: 20px; }
 .bk-section { background: #fff; border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); }
-.bk-section-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+.bk-section-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--accent); }
 
 .trip-car-row { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
 .trip-car-img { width: 90px; height: 66px; object-fit: cover; border-radius: var(--radius-sm); }
 .trip-car-name { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-.trip-car-tags { display: flex; gap: 6px; margin-bottom: 6px; }
+.trip-car-tags { display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
 .tag { padding: 3px 10px; background: var(--gray-100); border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--gray-600); }
 .trip-location { font-size: 12px; color: var(--gray-500); }
 
-.trip-dates { display: flex; align-items: center; gap: 10px; background: var(--gray-50); border-radius: var(--radius-sm); padding: 14px; border: 1px solid var(--gray-100); }
-.trip-date-item { flex: 1; }
+.trip-dates { display: flex; align-items: center; gap: 10px; background: var(--gray-50); border-radius: var(--radius-sm); padding: 14px; border: 1px solid var(--gray-100); flex-wrap: wrap; }
+.trip-date-item { flex: 1; min-width: 150px; }
 .tdi-label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--gray-400); font-weight: 600; margin-bottom: 4px; }
 .tdi-val { font-size: 13px; font-weight: 600; }
 .trip-date-divider { font-size: 18px; color: var(--accent); font-weight: 700; }
 
 .addon-list { display: flex; flex-direction: column; gap: 12px; }
-.addon-item { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-.addon-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); }
+.addon-item { display: flex; align-items: center; gap: 10px; font-size: 14px; flex-wrap: wrap; }
+.addon-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
 .addon-label { flex: 1; color: var(--gray-700); }
 .addon-price { font-size: 13px; font-weight: 600; color: var(--accent); }
 
 .insurance-options { display: flex; flex-direction: column; gap: 10px; }
-.ins-option { display: flex; align-items: center; gap: 10px; font-size: 14px; }
-.ins-option input[type="radio"] { accent-color: var(--accent); width: 16px; height: 16px; }
+.ins-option { display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
+.ins-option input[type="radio"] { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
 
 .pay-sub { font-size: 12px; color: var(--gray-400); margin-top: -10px; margin-bottom: 14px; }
 .pay-methods { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
-.pay-method-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 8px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; color: var(--gray-600); background: #fff; }
-.pay-method-btn.active { border-color: var(--accent); background: rgba(232,57,14,0.05); color: var(--accent); }
+.pay-method-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 8px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; color: var(--gray-600); background: #fff; cursor: pointer; transition: all 0.2s ease; }
+.pay-method-btn.active { border-color: var(--accent); background: rgba(22,163,74,0.05); color: var(--accent); }
+.pay-method-btn:hover { border-color: var(--accent-light); }
 .pm-icon { font-size: 22px; }
 .pay-detail { display: flex; flex-direction: column; gap: 10px; }
-.pay-input { padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 14px; outline: none; font-family: var(--font-body); width: 100%; }
+.pay-input { padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 14px; outline: none; font-family: var(--font-body); width: 100%; transition: all 0.2s ease; }
+.pay-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
 
 .bk-right { position: sticky; top: 80px; }
-.price-summary-card { background: var(--black); color: #fff; border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 18px; }
+.price-summary-card { background: var(--black); color: #fff; border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 18px; border: 2px solid var(--accent); }
 .ps-title { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.6); text-transform: uppercase; }
-.ps-price-big { font-family: var(--font-display); font-size: 42px; font-weight: 800; }
+.ps-price-big { font-family: var(--font-display); font-size: 42px; font-weight: 800; color: var(--accent-light); }
 .ps-breakdown { display: flex; flex-direction: column; gap: 10px; }
 .ps-row { display: flex; justify-content: space-between; font-size: 14px; color: rgba(255,255,255,0.7); }
-.ps-row.discount span:last-child { color: #4ade80; }
+.ps-row.discount span:last-child { color: var(--accent-light); }
 .ps-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 4px 0; }
 .ps-row.total { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: #fff; }
-.btn-cart-cost { width: 100%; padding: 16px; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; font-family: var(--font-display); border-radius: var(--radius-sm); }
+.btn-cart-cost { width: 100%; padding: 16px; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; font-family: var(--font-display); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.3s ease; border: none; }
+.btn-cart-cost:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22,163,74,0.3); }
 .trust-badges { display: flex; flex-direction: column; gap: 6px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.1); }
 .trust-badges span { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+@media (max-width: 1024px) {
+  .bk-layout { grid-template-columns: 1fr; }
+  .bk-right { position: static; }
+  .bk-container { padding: 20px 16px 40px; }
+}
 
 @media (max-width: 768px) {
   .bk-layout { grid-template-columns: 1fr; }
   .bk-right { position: static; }
   .pay-methods { grid-template-columns: repeat(2, 1fr); }
+  .bk-title { font-size: 24px; margin-bottom: 20px; }
+  .bk-section { padding: 18px 16px; }
+  .trip-dates { flex-direction: column; align-items: flex-start; }
+  .trip-date-item { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .bk-container { padding: 16px 12px 30px; }
+  .bk-title { font-size: 20px; }
+  .bk-section { padding: 16px 12px; margin-bottom: 12px; }
+  .trip-car-img { width: 80px; height: 60px; }
+  .trip-car-name { font-size: 14px; }
+  .pay-methods { grid-template-columns: 1fr; gap: 8px; }
+  .pay-method-btn { padding: 12px 6px; }
+  .ps-price-big { font-size: 32px; }
+  .ps-title { font-size: 12px; }
+  .ps-row { font-size: 12px; }
+  .btn-cart-cost { padding: 14px; font-size: 13px; }
+  .price-summary-card { padding: 20px 16px; }
 }

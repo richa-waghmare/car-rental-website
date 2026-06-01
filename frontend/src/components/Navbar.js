@@ -40,14 +40,15 @@ return (
         <span className="logo-text">Goro Cars</span>
       </div>
        <div className="nav-links">
-    <button className="nav-link">Home</button>
-    <button className="nav-link">Bookings</button>
+    <button className="nav-link" onClick={() => navigate('/landing')}>Home</button>
+    <button className="nav-link" onClick={() => navigate('/Booking')}>Bookings</button>
     <div className="nav-avatar" onClick={
       () => navigate('/Userprofile')
     }>
-      <div className="profile-avatar">
-            {user1?.name?.charAt(0)}
-          </div>
+                    
+  <div className="profile-avatar">        
+    {user1?.name?.charAt(0)}              
+  </div>
     </div>
     <button className="nav-link logout" onClick={() =>{
       localStorage.removeItem("token");  
