@@ -1,53 +1,435 @@
-.adash-root { display: flex; flex-direction: column; gap: 28px; }
-
-.adash-header { display: flex; align-items: flex-start; justify-content: space-between; }
-.adash-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; margin-bottom: 4px; }
-.adash-sub { font-size: 13px; color: var(--gray-400); }
-.adash-export-btn { padding: 10px 20px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; color: var(--gray-600); background: #fff; }
-
-.adash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.stat-card { background: #fff; border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); }
-.stat-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.stat-icon { font-size: 22px; }
-.stat-change { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
-.stat-change.up { background: rgba(22,163,74,0.1); color: var(--success); }
-.stat-change.down { background: rgba(232,57,14,0.1); color: var(--accent); }
-.stat-val { font-family: var(--font-display); font-size: 30px; font-weight: 800; margin-bottom: 4px; }
-.stat-label { font-size: 13px; color: var(--gray-400); font-weight: 500; }
-
-.adash-mid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
-
-.adash-card { background: #fff; border-radius: var(--radius-md); padding: 24px 26px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100); }
-.adash-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.adash-card-header h3 { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
-.adash-view-all { font-size: 13px; font-weight: 600; color: var(--accent); }
-
-.chart-period-tabs { display: flex; gap: 6px; }
-.chart-period-tabs button { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--gray-500); border: 1.5px solid var(--gray-200); background: #fff; }
-.chart-period-tabs button.active { background: var(--black); color: #fff; border-color: var(--black); }
-
-.bar-chart { display: flex; align-items: flex-end; gap: 16px; height: 180px; padding-top: 20px; }
-.bar-group { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; height: 100%; }
-.bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; }
-.bar-fill {
-  width: 100%; background: linear-gradient(180deg, var(--accent) 0%, #ff7043 100%);
-  border-radius: 6px 6px 0 0; position: relative; min-height: 8px;
+/* Fleet Inventory Dashboard */
+.fi-root {
+  padding: 32px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0f1f4 100%);
+  min-height: 100vh;
 }
-.bar-tip { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: var(--gray-600); white-space: nowrap; }
-.bar-label { font-size: 12px; color: var(--gray-400); font-weight: 600; }
 
-.top-cars-list { display: flex; flex-direction: column; gap: 14px; }
-.top-car-row { display: flex; align-items: center; gap: 14px; padding: 12px; background: var(--gray-50); border-radius: var(--radius-sm); }
-.top-car-rank { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--accent); width: 28px; text-align: center; }
-.top-car-info { flex: 1; }
-.top-car-name { font-size: 14px; font-weight: 700; }
-.top-car-meta { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
-.top-car-revenue { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--success); }
+/* Header */
+.fi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 
-.adash-table-wrap { overflow-x: auto; }
-.adash-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.adash-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--gray-400); border-bottom: 1.5px solid var(--gray-100); }
-.adash-table td { padding: 14px 14px; border-bottom: 1px solid var(--gray-50); color: var(--gray-700); }
+.fi-header-left h1.fi-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.fi-header-left p.fi-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin: 6px 0 0 0;
+}
+
+.fi-btn-add {
+  background: linear-gradient(135deg, #0d7a77 0%, #065a56 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(13, 122, 119, 0.3);
+}
+
+.fi-btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(13, 122, 119, 0.4);
+}
+
+/* Stats */
+.fi-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.fi-stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e8e8e8;
+}
+
+.fi-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.fi-stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0d7a77;
+}
+
+/* Controls */
+.fi-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fi-search-wrap {
+  flex: 1;
+  min-width: 250px;
+}
+
+.fi-search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.fi-search-input:focus {
+  border-color: #0d7a77;
+  box-shadow: 0 0 0 3px rgba(13, 122, 119, 0.1);
+}
+
+.fi-filters {
+  display: flex;
+  gap: 12px;
+}
+
+.fi-filter-select,
+.fi-sort-select {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.fi-filter-select:hover,
+.fi-sort-select:hover {
+  border-color: #0d7a77;
+}
+
+/* Error & Loading */
+.fi-error-msg {
+  background: #ffe8e8;
+  color: #c33;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  border-left: 4px solid #c33;
+}
+
+.fi-loading,
+.fi-empty-state {
+  text-align: center;
+  padding: 60px 32px;
+  background: white;
+  border-radius: 12px;
+  color: #999;
+}
+
+.fi-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.fi-empty-state h3 {
+  font-size: 18px;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+}
+
+.fi-empty-state p {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+
+/* Table */
+.fi-table-wrap {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+}
+
+.fi-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fi-thead {
+  background: linear-gradient(90deg, #f5f7fa 0%, #f0f1f4 100%);
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.fi-th {
+  padding: 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fi-tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.fi-tr:hover {
+  background: #fafafa;
+}
+
+.fi-tr:last-child {
+  border-bottom: none;
+}
+
+.fi-td {
+  padding: 16px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.fi-td-vehicle {
+  min-width: 300px;
+}
+
+.fi-vehicle-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.fi-vehicle-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fi-vehicle-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fi-image-placeholder {
+  font-size: 24px;
+}
+
+.fi-vehicle-details {
+  flex: 1;
+}
+
+.fi-vehicle-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.fi-vehicle-specs {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.fi-spec-dot {
+  margin: 0 6px;
+}
+
+.fi-reg-number {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.fi-status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.fi-status-badge.fi-status-available {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.fi-status-badge.fi-status-booked {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.fi-td-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.fi-btn-edit,
+.fi-btn-delete {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fi-btn-edit:hover {
+  background: #f0f7f6;
+  border-color: #0d7a77;
+}
+
+.fi-btn-delete:hover {
+  background: #fef5f5;
+  border-color: #c33;
+}
+
+/* Pagination */
+.fi-pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 24px;
+  padding-bottom: 24px;
+}
+
+.fi-page-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.fi-page-btn:hover {
+  border-color: #0d7a77;
+  color: #0d7a77;
+}
+
+.fi-page-btn.fi-page-btn-active {
+  background: #0d7a77;
+  color: white;
+  border-color: #0d7a77;
+}
+
+.fi-page-dots {
+  color: #999;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fi-root {
+    padding: 16px;
+  }
+
+  .fi-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fi-btn-add {
+    width: 100%;
+    text-align: center;
+  }
+
+  .fi-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fi-controls {
+    flex-direction: column;
+  }
+
+  .fi-search-wrap {
+    min-width: 100%;
+  }
+
+  .fi-filters {
+    width: 100%;
+  }
+
+  .fi-filter-select,
+  .fi-sort-select {
+    flex: 1;
+  }
+
+  .fi-table {
+    font-size: 12px;
+  }
+
+  .fi-th,
+  .fi-td {
+    padding: 12px 8px;
+  }
+
+  .fi-vehicle-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fi-vehicle-image {
+    width: 100%;
+  }
+
+  .fi-td-actions {
+    width: 100%;
+  }
+
+  .fi-btn-edit,
+  .fi-btn-delete {
+    flex: 1;
+  }
+}
+
 .adash-table tr:last-child td { border-bottom: none; }
 .booking-id-cell { font-family: monospace; font-size: 12px; color: var(--gray-500); }
 

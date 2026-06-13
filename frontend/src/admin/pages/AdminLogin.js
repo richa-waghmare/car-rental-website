@@ -1,10 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './AdminLogin.css';
 
 export default function AdminLogin() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password
+      });
+
+      // Check if user is admin
+      if (res.data.user.role !== 'admin') {
+        setError('❌ Only admins can access this portal.');
+        setLoading(false);
+        return;
+      }
+
+      // Store token and user
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      
+      if (rememberMe) {
+        localStorage.setItem('adminEmail', email);
+      }
+
+      // Navigate to admin dashboard
+      navigate('/AdminDashboard');
+    } catch (err) {
+      const message = err.response?.data?.message || 'Login failed. Please try again.';
+      setError(`❌ ${message}`);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="al-root">
-
       {/* Left */}
       <div className="al-left">
         <div className="al-left-content">
@@ -43,33 +87,70 @@ export default function AdminLogin() {
             <p>Restricted access — authorized personnel only</p>
           </div>
 
-          <div className="al-form">
+          {error && <div className="al-error-msg">{error}</div>}
+
+          <form className="al-form" onSubmit={handleLogin}>
             <div className="al-form-group">
               <label>Admin Email</label>
-              <input type="email" placeholder="admin@carrental.com" />
+              <input
+                type="email"
+                placeholder="admin@carrental.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className="al-form-group">
               <label>Password</label>
               <div className="al-pass-wrap">
-                <input type="password" placeholder="Enter admin password" />
-                <button className="al-eye">👁</button>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter admin password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="al-eye"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? '🙈' : '👁'}
+                </button>
               </div>
             </div>
             <div className="al-form-row">
               <label className="al-remember">
-                <input type="checkbox" /> Remember me
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                Remember me
               </label>
               <span className="al-forgot">Forgot password?</span>
             </div>
-            <button className="al-btn-login">Login to Admin Panel →</button>
-          </div>
+            <button type="submit" className="al-btn-login" disabled={loading}>
+              {loading ? '⏳ Logging in...' : 'Login to Admin Panel →'}
+            </button>
+          </form>
 
           <div className="al-back">
-            <button>← Back to Customer Site</button>
+            <button
+              type="button"
+              onClick={() => navigate('/landing')}
+              className="al-back-btn"
+            >
+              ← Back to Customer Site
+            </button>
+          </div>
+
+          <div className="al-demo-creds">
+            <p className="al-demo-label">📌 Demo Credentials:</p>
+            <code>Email: admin@test.com | Password: admin123</code>
           </div>
         </div>
       </div>
-
     </div>
   );
 }

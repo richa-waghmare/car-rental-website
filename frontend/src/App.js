@@ -14,15 +14,16 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
 // Admin Pages
-// import AdminLogin from './admin/pages/AdminLogin';
+import AdminLogin from './admin/pages/AdminLogin';
 import AdminDashboard from './admin/pages/AdminDashboard';
 import AdminCars from './admin/pages/AdminCars';
 import AdminBookings from './admin/pages/AdminBookings';
 import AdminUsers from './admin/pages/AdminUsers';
 import AdminCarAdd from './admin/pages/AdminCarAdd';
 import AdminCarEdit from './admin/pages/AdminCarEdit';
- function App() {
- return (
+
+function App() {
+  return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -34,6 +35,7 @@ import AdminCarEdit from './admin/pages/AdminCarEdit';
       <Route path="/Userprofile" element={<Userprofile/>} />
       <Route path="/ForgotPassword" element={<ForgotPassword/>} />
       <Route path="/reset-password/:token" element={<ResetPassword/>} />
+      <Route path="/AdminLogin" element={<AdminLogin />} />
       <Route path="/AdminDashboard" element={<AdminDashboard />} />
       <Route path="/AdminCars" element={<AdminCars/>} />
       <Route path="/AdminBookings" element={<AdminBookings/>} />
@@ -41,7 +43,7 @@ import AdminCarEdit from './admin/pages/AdminCarEdit';
       <Route path="/AdminCarAdd" element={<AdminCarAdd/>} />
       <Route path="/AdminCarEdit/:id" element={<AdminCarEdit/>} />
     </Routes>
-    
   );
 }
+
 export default App;

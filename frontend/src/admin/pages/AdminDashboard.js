@@ -1,202 +1,258 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
 import './AdminDashboard.css';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-export default function AdminDashboard() {
-  const [cars, setCars] = useState([]);
+import { useNavigate } from 'react-router-dom';
 
+export default function AdminDashboard() {
+  const navigate = useNavigate();
+  const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('');
+  const [sortBy, setSortBy] = useState('newest');
+  const [error, setError] = useState('');
+
+  // Check admin auth
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.role !== 'admin') {
+      navigate('/AdminLogin');
+    }
+  }, [navigate]);
+
+  // Fetch cars
+  useEffect(() => {
+    fetchCars();
+  }, []);
 
   const fetchCars = async () => {
-
+    setLoading(true);
+    setError('');
     try {
-
-      const res = await axios.get(
-        "http://localhost:5000/api/cars/allcars"
-      );
-
-      setCars(res.data);
-
+      const res = await axios.get('http://localhost:5000/api/cars/allcars');
+      setCars(res.data || []);
+      setFilteredCars(res.data || []);
     } catch (err) {
-
       console.error(err);
-
+      setError('Failed to load fleet inventory');
+      setCars([]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  fetchCars();
+  // Search and filter
+  useEffect(() => {
+    let result = cars;
 
-}, []);
+    // Search by name
+    if (searchTerm) {
+      result = result.filter(car =>
+        car.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        car.type.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Filter by type
+    if (filterType) {
+      result = result.filter(car => car.type === filterType);
+    }
+
+    // Sort
+    if (sortBy === 'price-low') {
+      result = result.sort((a, b) => a.priceperday - b.priceperday);
+    } else if (sortBy === 'price-high') {
+      result = result.sort((a, b) => b.priceperday - a.priceperday);
+    } else if (sortBy === 'newest') {
+      result = result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    setFilteredCars(result);
+  }, [searchTerm, filterType, sortBy, cars]);
+
+  const handleDeleteCar = async (carId) => {
+    if (!window.confirm('Are you sure you want to delete this car?')) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:5000/api/cars/car/${carId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert('✅ Car deleted successfully');
+      fetchCars();
+    } catch (err) {
+      alert(`❌ ${err.response?.data?.message || 'Delete failed'}`);
+    }
+  };
+
   return (
     <AdminLayout>
-      <div className="adash-root">
-
-        <div className="adash-header">
-          <div>
-            <h1 className="adash-title">Dashboard</h1>
-            <p className="adash-sub">Welcome back, Admin · Saturday, Apr 11 2026</p>
+      <div className="fi-root">
+        {/* Header */}
+        <div className="fi-header">
+          <div className="fi-header-left">
+            <h1 className="fi-title">Fleet Inventory</h1>
+            <p className="fi-subtitle">Manage and track your premium car collection effortlessly.</p>
           </div>
-          <button className="adash-export-btn">Export Report ↓</button>
+
+          <button
+            className="fi-btn-add"
+            onClick={() => navigate('/AdminCarAdd')}
+          >
+            ➕ Add New Car
+          </button>
         </div>
 
-        {/* Stat Cards */}
-        <div className="adash-stats">
-          <div className="stat-card">
-            <div className="stat-card-top"><span className="stat-icon">📋</span><span className="stat-change up">+12%</span></div>
-            <div className="stat-val">1,240</div>
-            <div className="stat-label">Total Bookings</div>
+        {/* Stats */}
+        <div className="fi-stats">
+          <div className="fi-stat-card">
+            <div className="fi-stat-label">Total Fleet</div>
+            <div className="fi-stat-value">{cars.length}</div>
           </div>
-          <div className="stat-card">
-            <div className="stat-card-top"><span className="stat-icon">🚗</span><span className="stat-change up">+3</span></div>
-            <div className="stat-val">{cars.length}</div>
-            <div className="stat-label">Active Cars</div>
+          <div className="fi-stat-card">
+            <div className="fi-stat-label">Available</div>
+            <div className="fi-stat-value">{cars.filter(c => c.status === 'Available').length}</div>
           </div>
-          <div className="stat-card">
-            <div className="stat-card-top"><span className="stat-icon">💰</span><span className="stat-change up">+8.4%</span></div>
-            <div className="stat-val">₹9.2L</div>
-            <div className="stat-label">Monthly Revenue</div>
+          <div className="fi-stat-card">
+            <div className="fi-stat-label">Booked</div>
+            <div className="fi-stat-value">{cars.filter(c => c.status === 'Booked').length}</div>
           </div>
-          <div className="stat-card">
-            <div className="stat-card-top"><span className="stat-icon">⏳</span><span className="stat-change down">-5</span></div>
-            <div className="stat-val">17</div>
-            <div className="stat-label">Pending Returns</div>
+          <div className="fi-stat-card">
+            <div className="fi-stat-label">Maintenance</div>
+            <div className="fi-stat-value">2</div>
           </div>
         </div>
 
-        <div className="adash-mid">
-
-          {/* Bar Chart */}
-          <div className="adash-card adash-chart-card">
-            <div className="adash-card-header">
-              <h3>Revenue Overview</h3>
-              <div className="chart-period-tabs">
-                <button className="active">Monthly</button>
-                <button>Weekly</button>
-              </div>
-            </div>
-            <div className="bar-chart">
-              <div className="bar-group">
-                <div className="bar-wrap"><div className="bar-fill" style={{ height: '55%' }}><span className="bar-tip">₹55K</span></div></div>
-                <span className="bar-label">Nov</span>
-              </div>
-              <div className="bar-group">
-                <div className="bar-wrap"><div className="bar-fill" style={{ height: '72%' }}><span className="bar-tip">₹72K</span></div></div>
-                <span className="bar-label">Dec</span>
-              </div>
-              <div className="bar-group">
-                <div className="bar-wrap"><div className="bar-fill" style={{ height: '61%' }}><span className="bar-tip">₹61K</span></div></div>
-                <span className="bar-label">Jan</span>
-              </div>
-              <div className="bar-group">
-                <div className="bar-wrap"><div className="bar-fill" style={{ height: '68%' }}><span className="bar-tip">₹68K</span></div></div>
-                <span className="bar-label">Feb</span>
-              </div>
-              <div className="bar-group">
-                <div className="bar-wrap"><div className="bar-fill" style={{ height: '80%' }}><span className="bar-tip">₹80K</span></div></div>
-                <span className="bar-label">Mar</span>
-              </div>
-              <div className="bar-group">
-                <div className="bar-wrap"><div className="bar-fill" style={{ height: '92%' }}><span className="bar-tip">₹92K</span></div></div>
-                <span className="bar-label">Apr</span>
-              </div>
-            </div>
+        {/* Search & Filters */}
+        <div className="fi-controls">
+          <div className="fi-search-wrap">
+            <input
+              type="text"
+              placeholder="🔍 Search by name or type..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="fi-search-input"
+            />
           </div>
 
-          {/* Top Cars */}
-          <div className="adash-card">
-            <div className="adash-card-header"><h3>Top Performing Cars</h3></div>
-            <div className="top-cars-list">
-              <div className="top-car-row">
-                <span className="top-car-rank">#1</span>
-                <div className="top-car-info"><div className="top-car-name">Maruti Swift</div><div className="top-car-meta">320 bookings · ⭐ 4.6</div></div>
-                <div className="top-car-revenue">₹11.2L</div>
-              </div>
-              <div className="top-car-row">
-                <span className="top-car-rank">#2</span>
-                <div className="top-car-info"><div className="top-car-name">Honda City</div><div className="top-car-meta">210 bookings · ⭐ 4.8</div></div>
-                <div className="top-car-revenue">₹10.5L</div>
-              </div>
-              <div className="top-car-row">
-                <span className="top-car-rank">#3</span>
-                <div className="top-car-info"><div className="top-car-name">Mahindra XUV300</div><div className="top-car-meta">180 bookings · ⭐ 4.4</div></div>
-                <div className="top-car-revenue">₹9.9L</div>
-              </div>
-              <div className="top-car-row">
-                <span className="top-car-rank">#4</span>
-                <div className="top-car-info"><div className="top-car-name">Hyundai i20</div><div className="top-car-meta">150 bookings · ⭐ 4.5</div></div>
-                <div className="top-car-revenue">₹5.2L</div>
-              </div>
-            </div>
-          </div>
+          <div className="fi-filters">
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+              className="fi-filter-select"
+            >
+              <option value="">All Types</option>
+              <option value="SUV">SUV</option>
+              <option value="Sedan">Sedan</option>
+              <option value="Hatchback">Hatchback</option>
+            </select>
 
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="fi-sort-select"
+            >
+              <option value="newest">Sort: Newest</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+            </select>
+          </div>
         </div>
 
-        {/* Recent Bookings Table */}
-        <div className="adash-card">
-          <div className="adash-card-header">
-            <h3>Recent Bookings</h3>
-            <button className="adash-view-all">View all →</button>
+        {/* Content */}
+        {error && <div className="fi-error-msg">{error}</div>}
+
+        {loading ? (
+          <div className="fi-loading">⏳ Loading fleet inventory...</div>
+        ) : filteredCars.length === 0 ? (
+          <div className="fi-empty-state">
+            <div className="fi-empty-icon">🚗</div>
+            <h3>No cars found</h3>
+            <p>Try adjusting your search or filters</p>
           </div>
-          <div className="adash-table-wrap">
-            <table className="adash-table">
-              <thead>
+        ) : (
+          <div className="fi-table-wrap">
+            <table className="fi-table">
+              <thead className="fi-thead">
                 <tr>
-                  <th>Booking ID</th>
-                  <th>Customer</th>
-                  <th>Car</th>
-                  <th>Date</th>
-                  <th>Amount</th>
-                  <th>Status</th>
+                  <th className="fi-th">Vehicle Details</th>
+                  <th className="fi-th">Reg. Number</th>
+                  <th className="fi-th">Status</th>
+                  <th className="fi-th">Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td className="booking-id-cell">#B-0023853126</td>
-                  <td>Rahul Mehta</td>
-                  <td>Maruti Swift</td>
-                  <td>Apr 11</td>
-                  <td><strong>₹3,499</strong></td>
-                  <td><span className="status-badge status-active">Active</span></td>
-                </tr>
-                <tr>
-                  <td className="booking-id-cell">#B-0023853120</td>
-                  <td>Priya Sharma</td>
-                  <td>Honda City</td>
-                  <td>Apr 10</td>
-                  <td><strong>₹4,999</strong></td>
-                  <td><span className="status-badge status-completed">Completed</span></td>
-                </tr>
-                <tr>
-                  <td className="booking-id-cell">#B-0023853115</td>
-                  <td>Amit Kumar</td>
-                  <td>Mahindra XUV300</td>
-                  <td>Apr 10</td>
-                  <td><strong>₹5,499</strong></td>
-                  <td><span className="status-badge status-completed">Completed</span></td>
-                </tr>
-                <tr>
-                  <td className="booking-id-cell">#B-0023853110</td>
-                  <td>Sneha Patil</td>
-                  <td>Maruti Swift</td>
-                  <td>Apr 09</td>
-                  <td><strong>₹3,499</strong></td>
-                  <td><span className="status-badge status-cancelled">Cancelled</span></td>
-                </tr>
-                <tr>
-                  <td className="booking-id-cell">#B-0023853104</td>
-                  <td>Rohan Joshi</td>
-                  <td>Honda City</td>
-                  <td>Apr 09</td>
-                  <td><strong>₹4,999</strong></td>
-                  <td><span className="status-badge status-active">Active</span></td>
-                </tr>
+              <tbody className="fi-tbody">
+                {filteredCars.map((car) => (
+                  <tr key={car._id} className="fi-tr">
+                    <td className="fi-td fi-td-vehicle">
+                      <div className="fi-vehicle-info">
+                        <div className="fi-vehicle-image">
+                          {car.images && car.images[0] ? (
+                            <img
+                              src={`http://localhost:5000/${String(car.images[0]).replace(/\\/g, '/')}`}
+                              alt={car.name}
+                            />
+                          ) : (
+                            <div className="fi-image-placeholder">🚗</div>
+                          )}
+                        </div>
+                        <div className="fi-vehicle-details">
+                          <h4 className="fi-vehicle-name">{car.name}</h4>
+                          <div className="fi-vehicle-specs">
+                            <span>{car.type}</span>
+                            <span className="fi-spec-dot">•</span>
+                            <span>{car.fuel}</span>
+                            <span className="fi-spec-dot">•</span>
+                            <span>₹{car.priceperday}/day</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="fi-td">
+                      <span className="fi-reg-number">{car.regNumber || 'N/A'}</span>
+                    </td>
+                    <td className="fi-td">
+                      <span className={`fi-status-badge fi-status-${car.status.toLowerCase()}`}>
+                        {car.status === 'Available' ? '✓' : '✕'} {car.status}
+                      </span>
+                    </td>
+                    <td className="fi-td fi-td-actions">
+                      <button
+                        className="fi-btn-edit"
+                        onClick={() => navigate(`/AdminCarEdit/${car._id}`)}
+                        title="Edit car"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        className="fi-btn-delete"
+                        onClick={() => handleDeleteCar(car._id)}
+                        title="Delete car"
+                      >
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-        </div>
+        )}
 
+        {/* Pagination */}
+        {filteredCars.length > 0 && (
+          <div className="fi-pagination">
+            <button className="fi-page-btn fi-page-btn-active">1</button>
+            <button className="fi-page-btn">2</button>
+            <button className="fi-page-btn">3</button>
+            <span className="fi-page-dots">...</span>
+            <button className="fi-page-btn">→</button>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );
 }
+                
